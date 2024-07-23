@@ -36,15 +36,18 @@
             alt="logo of telegram web apps"
         /></a>
       </div>
-      <h1>Telegram Mini Apps Vanilla JS Sample App</h1>
+      <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
       <button id="btn">Show Alert</button>
+
     </main>
     <script>
       import WebApp from "@twa-dev/sdk";
       WebApp.init(); // Initialize the WebApp SDK
       document
         .getElementById("btn")
-        .addEventListener("click", () => alert("Hello!")); // Add an event listener to the button to show an alert when clicked
+        .addEventListener("click", () => {
+          document.getElementById('title').innerText = 'Hello from WebApp!';
+        }); // Add an event listener to the button to show an alert when clicked
     </script>
   </body>
 </html>
