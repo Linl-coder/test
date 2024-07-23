@@ -8,6 +8,7 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Telegram Mini Apps Vanilla JS Sample App</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
       body {
@@ -27,45 +28,48 @@
   </head>
 
   <body>
-    <main>
-      <div align="center">
-        <a href="https://ton.org/"
-          ><img
-            width="48"
-            src="./assets/tapps.png"
-            alt="logo of telegram web apps"
-        /></a>
-      </div>
-      <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-      <button id="btn">Show Alert</button>
-      <button onclick="Telegram.WebApp.showAlert('Hello World!');">
-        Launch Alert
-      </button>
-      <button onclick="showPopup();">Launch Popup</button>
-    </main>
+    <div id="app">
+      {{message}}
+      <main>
+        <div align="center">
+          <a href="https://ton.org/"
+            ><img
+              width="48"
+              src="./assets/tapps.png"
+              alt="logo of telegram web apps"
+          /></a>
+        </div>
+        <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
+        <button @click="Telegram.WebApp.showAlert('Hello World!');">
+          Launch Alert
+        </button>
+        <button @click="showPopup">Launch Popup</button>
+      </main>
+    </div>
     <script>
-      // Init TWA
-      Telegram.WebApp.ready();
-      document.getElementById("btn").addEventListener("click", function () {
-        document.getElementById("title").innerText = "Hello from WebApp!";
-      }); // Add an event listener to the button to show an alert when clicked
-      function showPopup() {
-        Telegram.WebApp.showPopup(
-          {
-            title: "Title",
-            message: "Some message",
-            buttons: [
-              { id: "link", type: "default", text: "Open ton.org" },
-              { type: "cancel" },
-            ],
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue",
+        },
+        created() {
+          // Init TWA
+          Telegram.WebApp.ready();
+        },
+        methods: {
+          showPopup() {
+            console.log(111)
+            Telegram.WebApp.showPopup({
+              title: "Title",
+              message: "Some message",
+              buttons: [
+                { id: "link", type: "default", text: "Open ton.org" },
+                { type: "cancel" },
+              ],
+            });
           },
-          function (btn) {
-            if (btn === "link") {
-              Telegram.WebApp.openLink("https://ton.org/");
-            }
-          }
-        );
-      }
+        },
+      });
     </script>
   </body>
 </html>
