@@ -62,7 +62,6 @@
           this.tg_data = Telegram.WebApp.initDataUnsafe;
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
           const bot = new Bot(token);
-          // bot.start();
           let _this = this;
           bot.command("start", async (ctx) => {
             const firstName = ctx.upadte.message.from.first_name;
@@ -80,9 +79,11 @@
               _this.alert(error);
             }
           });
+          bot.start();
+          
         },
         methods: {
-          alert(data = "error") {
+          alert(data = "Hello Tg") {
             Telegram.WebApp.showAlert(data);
           },
           showPopup() {
