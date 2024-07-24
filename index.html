@@ -65,7 +65,7 @@
 
           const tg_data = Telegram.WebApp.initDataUnsafe;
           this.tg_data = tg_data;
-          const userData = Telegram.WebAppUser;
+          const userData = Telegram.WebAppUser.initDataUnsafe;
           this.userData = userData;
           const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
           const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
