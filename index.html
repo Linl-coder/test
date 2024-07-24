@@ -61,9 +61,10 @@
           // Init TWA
           Telegram.WebApp.ready();
           Telegram.WebApp.setBackgroundColor("#ff0000");
-          this.tg_data = Telegram.WebApp.initDataUnsafe;
-          const botUsername = 'kk_boy_xun'; // 替换为你的Telegram Bot的username
-          const userId = 7102423598; // 替换为要查询的用户的Telegram用户ID
+          const tg_data = Telegram.WebApp.initDataUnsafe;
+          this.tg_data = tg_data;
+          const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
+          const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
           // 获取用户信息
           fetch(
@@ -71,7 +72,7 @@
           )
             .then((response) => response.json())
             .then((data) => {
-              console.log(data)
+              console.log(data);
               if (data.result.total_count > 0) {
                 const fileId = data.result.photos[0][0].file_id;
                 return fetch(
