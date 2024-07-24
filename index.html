@@ -8,8 +8,11 @@
     />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Telegram Mini Apps Vanilla JS Sample App</title>
+    <!-- Vue.js 库 -->
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
-    <script src="https://deno.land/x/grammy@v1.25.0/mod.ts"></script>
+    <!-- Grammy 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/grammy/dist/grammy.browser.js"></script>
+    <!-- Telegram Web App 库 -->
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
       body {
@@ -63,7 +66,7 @@
           Telegram.WebApp.setBackgroundColor("#ff0000");
           this.tg_data = Telegram.WebApp.initDataUnsafe;
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
-          const bot = new GrammyBot(token);
+          const bot = new grammy.Bot(token);
           this.bot = bot;
           bot.command("start", async (ctx) => {
             const firstName = ctx.upadte.message.from.first_name;
