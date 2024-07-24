@@ -65,8 +65,8 @@
 
           const tg_data = Telegram.WebApp.initDataUnsafe;
           this.tg_data = tg_data;
-          // const userData = Telegram.WebAppUserData.get();
-          // this.userData = userData;
+          const userData = Telegram.WebAppUser;
+          this.userData = userData;
           const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
           const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
