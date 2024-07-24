@@ -42,7 +42,7 @@
         </div>
         <img width="48" :src="photoUrl" alt="" />
         <div style="color: red">{{tg_data}}</div>
-        <div>{{bot}}</div>
+        <div>{{userData}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
         <button @click="alert()">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
@@ -56,11 +56,15 @@
           tg_data: "",
           bot: "222",
           photoUrl: "",
+          userData: "",
         },
         created() {
           // Init TWA
           Telegram.WebApp.ready();
           Telegram.WebApp.setBackgroundColor("#ff0000");
+          const userData = Telegram.WebAppUserData.get();
+          this.userData = userData;
+
           const tg_data = Telegram.WebApp.initDataUnsafe;
           this.tg_data = tg_data;
           const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
