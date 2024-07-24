@@ -41,6 +41,7 @@
           /></a>
         </div>
         <img width="48" :src="photoUrl" alt="" />
+        <div>{{ver}}</div>
         <div style="color: red">{{tg_data}}</div>
         <div>{{userData}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
@@ -57,6 +58,7 @@
           bot: "222",
           photoUrl: "",
           userData: "111",
+          ver:Telegram.WebApp.version,
         },
         created() {
           // Init TWA
