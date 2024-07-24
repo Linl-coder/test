@@ -11,6 +11,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
     <script src="https://deno.land/x/grammy@v1.25.0/mod.ts"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://telegram.org/js/telegram-widget.js?7" async></script>
     <style>
       body {
         --bg-color: var(--tg-theme-bg-color);
@@ -47,6 +48,16 @@
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
         <button @click="alert()">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
+        <button
+          id="telegram-auth-btn"
+          data-bot="YOUR_BOT_USERNAME"
+          data-request-access="write"
+          data-size="large"
+          data-userpic="true"
+          data-onauth="onTelegramAuth"
+        >
+          使用 Telegram 登录
+        </button>
       </main>
     </div>
     <script>
@@ -58,7 +69,7 @@
           bot: "222",
           photoUrl: "",
           userData: "111",
-          ver:Telegram.WebApp.version,
+          ver: Telegram.WebApp.version,
         },
         created() {
           // Init TWA
@@ -67,8 +78,6 @@
 
           const tg_data = Telegram.WebApp.initDataUnsafe;
           this.tg_data = tg_data;
-          const userData = Telegram.WebAppUserData.getBasicInfo();
-          this.userData = userData;
           const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
           const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
@@ -111,6 +120,11 @@
                 { type: "cancel" },
               ],
             });
+          },
+          onTelegramAuth(user) {
+            // 处理用户授权后的逻辑，例如显示用户信息等
+            console.log("Telegram 用户信息:", user);
+            alert("Telegram 用户信息: " + JSON.stringify(user));
           },
         },
       });
