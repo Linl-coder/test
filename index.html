@@ -54,7 +54,7 @@
           data-request-access="write"
           data-size="large"
           data-userpic="true"
-          data-onauth="onTelegramAuth"
+          @click="onTelegramAuth"
         >
           使用 Telegram 登录
         </button>
@@ -76,35 +76,35 @@
           Telegram.WebApp.ready();
           Telegram.WebApp.setBackgroundColor("#ff0000");
 
-          const tg_data = Telegram.WebApp.initDataUnsafe;
-          this.tg_data = tg_data;
-          const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
-          const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
-          const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
-          // 获取用户信息
-          fetch(
-            `https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`
-          )
-            .then((response) => response.json())
-            .then((data) => {
-              console.log(data);
-              if (data.result.total_count > 0) {
-                const fileId = data.result.photos[0][0].file_id;
-                return fetch(
-                  `https://api.telegram.org/bot${token}/getFile?file_id=${fileId}`
-                );
-              } else {
-                throw new Error("No profile photos found.");
-              }
-            })
-            .then((response) => response.json())
-            .then((fileData) => {
-              const fileUrl = `https://api.telegram.org/file/bot${token}/${fileData.result.file_path}`;
-              this.photoUrl = fileUrl;
-            })
-            .catch((error) => {
-              console.log(error.message);
-            });
+          // const tg_data = Telegram.WebApp.initDataUnsafe;
+          // this.tg_data = tg_data;
+          // const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
+          // const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
+          // const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
+          // // 获取用户信息
+          // fetch(
+          //   `https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`
+          // )
+          //   .then((response) => response.json())
+          //   .then((data) => {
+          //     console.log(data);
+          //     if (data.result.total_count > 0) {
+          //       const fileId = data.result.photos[0][0].file_id;
+          //       return fetch(
+          //         `https://api.telegram.org/bot${token}/getFile?file_id=${fileId}`
+          //       );
+          //     } else {
+          //       throw new Error("No profile photos found.");
+          //     }
+          //   })
+          //   .then((response) => response.json())
+          //   .then((fileData) => {
+          //     const fileUrl = `https://api.telegram.org/file/bot${token}/${fileData.result.file_path}`;
+          //     this.photoUrl = fileUrl;
+          //   })
+          //   .catch((error) => {
+          //     console.log(error.message);
+          //   });
         },
         methods: {
           alert(data = "Hello Tg") {
