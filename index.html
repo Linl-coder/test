@@ -51,7 +51,7 @@
         <button
           id="telegram-auth-btn"
           data-bot="@JJhubMini_bot"
-          data-request-access="write"
+          data-request-access="user_profile,user_photo"
           data-size="large"
           data-userpic="true"
           @click="onTelegramAuth"
@@ -75,12 +75,11 @@
           // Init TWA
           Telegram.WebApp.ready();
           Telegram.WebApp.setBackgroundColor("#ff0000");
-
           // const tg_data = Telegram.WebApp.initDataUnsafe;
           // this.tg_data = tg_data;
           // const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
           // const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
-          // const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
+          const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
           // // 获取用户信息
           // fetch(
           //   `https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`
