@@ -42,8 +42,9 @@
         </div>
         <img width="48" :src="photoUrl" alt="" />
         <div style="color: red">{{tg_data}}</div>
+        <div>{{bot}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-        <button @click="alert">Launch Alert</button>
+        <button @click="alert()">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
@@ -53,6 +54,7 @@
         data: {
           message: "Hello Vue",
           tg_data: "",
+          bot: "",
           photoUrl: "",
         },
         created() {
@@ -62,13 +64,17 @@
           this.tg_data = Telegram.WebApp.initDataUnsafe;
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
           const bot = new GrammyBot(token);
+          this.bot = bot;
           bot.command("start", async (ctx) => {
             const firstName = ctx.upadte.message.from.first_name;
             const userId = ctx.from.id;
             try {
-              const profilePhotos = await ctx.telegram.getUserProfilePhotos(userId, {
-                limit: 1,
-              });
+              const profilePhotos = await ctx.telegram.getUserProfilePhotos(
+                userId,
+                {
+                  limit: 1,
+                }
+              );
               if (profilePhotos.total_count > 0) {
                 const fileId = profilePhotos.photos[0][0].file_id;
                 const file = await ctx.telegram.getFile(fileId);
@@ -79,7 +85,6 @@
             }
           });
           bot.start();
-          
         },
         methods: {
           alert(data = "Hello Tg") {
