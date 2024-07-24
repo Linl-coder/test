@@ -9,6 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <title>Telegram Mini Apps Vanilla JS Sample App</title>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
+    <script src="https://deno.land/x/grammy@v1.25.0/mod.ts"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
       body {
@@ -39,10 +40,10 @@
               alt="logo of telegram web apps"
           /></a>
         </div>
+        <img width="48" :src="photoUrl" alt="" />
+        <div style="color: red">{{tg_data}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-        <button @click="Telegram.WebApp.showAlert('Hello World!');">
-          Launch Alert
-        </button>
+        <button @click="alert">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
@@ -51,14 +52,41 @@
         el: "#app",
         data: {
           message: "Hello Vue",
+          tg_data: "",
+          photoUrl: "",
         },
         created() {
           // Init TWA
           Telegram.WebApp.ready();
+          Telegram.WebApp.setBackgroundColor("#ff0000");
+          this.tg_data = Telegram.WebApp.initDataUnsafe;
+          const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
+          const bot = new Bot(token);
+          // bot.start();
+          let _this = this;
+          bot.command("start", async (ctx) => {
+            const firstName = ctx.upadte.message.from.first_name;
+            const userId = ctx.from.id;
+            try {
+              const profilePhotos = await bot.api.getUserProfilePhotos(userId, {
+                limit: 1,
+              });
+              if (profilePhotos.total_count > 0) {
+                const fileId = profilePhotos.photos[0][0].file_id;
+                const file = await bot.api.getFile(fileId);
+                _this.photoUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+              }
+            } catch (error) {
+              _this.alert(error);
+            }
+          });
         },
         methods: {
+          alert(data = "error") {
+            Telegram.WebApp.showAlert(data);
+          },
           showPopup() {
-            console.log(111)
+            console.log(111);
             Telegram.WebApp.showPopup({
               title: "Title",
               message: "Some message",
