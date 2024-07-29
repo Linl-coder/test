@@ -26,108 +26,27 @@
       a {
         color: var(--tg-theme-link-color);
       }
+      .btn{
+        padding: 4px 10px;
+        border-radius: 20px;
+        background-color: #0088cc;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
     </style>
   </head>
 
   <body>
     <div id="app">
-      {{message}}
       <main>
         <div align="center">
-          <a href="https://ton.org/"
-            ><img
-              width="48"
-              src="./assets/tapps.png"
-              alt="logo of telegram web apps"
-          /></a>
-          <a href="https://jjchub.com/">跳转到jjhub</a>
+          <a href="https://jjchub.com/">
+            <button class="btn">一键体验jjhub</button>
+          </a>
         </div>
-        <img width="48" :src="photoUrl" alt="" />
-        <div>{{ver}}</div>
-        <div style="color: red">{{tg_data}}</div>
-        <div>{{userData}}</div>
-        <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-        <button @click="alert()">Launch Alert</button>
-        <button @click="showPopup">Launch Popup</button>
-        <button
-          id="telegram-auth-btn"
-          data-bot="@JJhubMini_bot"
-          data-request-access="user_profile,user_photo"
-          data-size="large"
-          data-userpic="true"
-          data-onauth="onTelegramAuth"
-        >
-          使用 Telegram 登录
-        </button>
       </main>
     </div>
-    <script>
-      var app = new Vue({
-        el: "#app",
-        data: {
-          message: "Hello Vue",
-          tg_data: "",
-          bot: "222",
-          photoUrl: "",
-          userData: "111",
-          ver: Telegram.WebApp.version,
-        },
-        created() {
-          // Init TWA
-          Telegram.WebApp.ready();
-          Telegram.WebApp.setBackgroundColor("#ff0000");
-          // const tg_data = Telegram.WebApp.initDataUnsafe;
-          // this.tg_data = tg_data;
-          // const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
-          // const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
-          const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
-          // // 获取用户信息
-          // fetch(
-          //   `https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`
-          // )
-          //   .then((response) => response.json())
-          //   .then((data) => {
-          //     console.log(data);
-          //     if (data.result.total_count > 0) {
-          //       const fileId = data.result.photos[0][0].file_id;
-          //       return fetch(
-          //         `https://api.telegram.org/bot${token}/getFile?file_id=${fileId}`
-          //       );
-          //     } else {
-          //       throw new Error("No profile photos found.");
-          //     }
-          //   })
-          //   .then((response) => response.json())
-          //   .then((fileData) => {
-          //     const fileUrl = `https://api.telegram.org/file/bot${token}/${fileData.result.file_path}`;
-          //     this.photoUrl = fileUrl;
-          //   })
-          //   .catch((error) => {
-          //     console.log(error.message);
-          //   });
-        },
-        methods: {
-          alert(data = "Hello Tg") {
-            Telegram.WebApp.showAlert(data);
-          },
-          showPopup() {
-            console.log(111);
-            Telegram.WebApp.showPopup({
-              title: "Title",
-              message: "Some message",
-              buttons: [
-                { id: "link", type: "default", text: "Open ton.org" },
-                { type: "cancel" },
-              ],
-            });
-          },
-          onTelegramAuth(user) {
-            // 处理用户授权后的逻辑，例如显示用户信息等
-            console.log("Telegram 用户信息:", user);
-            alert("Telegram 用户信息: " + JSON.stringify(user));
-          },
-        },
-      });
-    </script>
+    <script></script>
   </body>
 </html>
