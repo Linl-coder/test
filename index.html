@@ -40,6 +40,7 @@
               src="./assets/tapps.png"
               alt="logo of telegram web apps"
           /></a>
+          <a href="https://jjchub.com/">跳转到jjhub</a>
         </div>
         <img width="48" :src="photoUrl" alt="" />
         <div>{{ver}}</div>
@@ -54,7 +55,7 @@
           data-request-access="user_profile,user_photo"
           data-size="large"
           data-userpic="true"
-          @click="onTelegramAuth"
+          data-onauth="onTelegramAuth"
         >
           使用 Telegram 登录
         </button>
