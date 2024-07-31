@@ -85,8 +85,9 @@
           },
         });
       }
+      initTelegramAuth()
       // 获取用户信息
-      // const phone = Telegram.WebApp.initDataUnsafe.user
+      const phone = Telegram.WebApp.initDataUnsafe.user
       const testBtn = document.getElementById("testBtn");
       testBtn.addEventListener("click", () => {
         // telegram的弹窗
