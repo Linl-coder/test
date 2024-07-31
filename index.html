@@ -53,17 +53,21 @@
           </button>
           <p>手机号：<span id="phone"></span></p>
           <p id="cs"></p>
+          <p>用户信息：<span id="user"></span></p>
         </div>
       </main>
     </div>
     <script>
       Telegram.WebApp.ready();
-      Telegram.WebApp.requestContact()
+      Telegram.WebApp.requestContact();
       Telegram.WebView.onEvent("phone_requested", function (data) {
         console.log("phone_requested:", data);
         document.getElementById("phone").innerText = data;
       });
-      
+      Telegram.getUserInfo().then(function (user) {
+        console.log("User info:", user);
+        document.getElementById("user").innerText = user;
+      });
       // .then(function (phoneNumber) {
       //   // 在这里处理用户授权后返回的手机号码
       //   console.log("User's phone number:", phoneNumber);
