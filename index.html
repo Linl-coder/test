@@ -64,27 +64,27 @@
       Telegram.WebApp.requestContact();
       // telegram小程序的登录
       // telegram 小程序获取用户的手机号
-      function initTelegramAuth() {
-        let phone = document.getElementById("phone");
-        let cs = document.getElementById("cs");
-        phone.innerText = "111";
-        cs.innerText = Telegram.Widget;
-        Telegram.Widget.Authorize({
-          bot_id: '@JJhubBot',
-          user_phone_number: true,
-          size: "large",
-          onSuccess: function (response) {
-            console.log("授权成功", response);
-            phone.innerText = response;
-            var phoneNumber = response.user.phone_number;
-            phone.innerText = phoneNumber;
-          },
-          onError: function (error) {
-            console.error("授权失败", error);
-          },
-        });
-      }
-      initTelegramAuth()
+      // function initTelegramAuth() {
+      //   let phone = document.getElementById("phone");
+      //   let cs = document.getElementById("cs");
+      //   phone.innerText = "111";
+      //   cs.innerText = Telegram.Widget;
+      //   Telegram.Widget.Authorize({
+      //     bot_id: '@JJhubBot',
+      //     user_phone_number: true,
+      //     size: "large",
+      //     onSuccess: function (response) {
+      //       console.log("授权成功", response);
+      //       phone.innerText = response;
+      //       var phoneNumber = response.user.phone_number;
+      //       phone.innerText = phoneNumber;
+      //     },
+      //     onError: function (error) {
+      //       console.error("授权失败", error);
+      //     },
+      //   });
+      // }
+      // initTelegramAuth()
       // 获取用户信息
       const phone = Telegram.WebApp.initDataUnsafe.user
       const testBtn = document.getElementById("testBtn");
