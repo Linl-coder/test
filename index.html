@@ -48,10 +48,7 @@
           <button id="testBtn">测试按钮</button>
           <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
           <button onclick="toggleMainButton();">Toggle Main Button</button>
-          <button
-            id="telegram-auth"
-            onclick="initTelegramAuth()"
-          >
+          <button id="telegram-auth" onclick="initTelegramAuth()">
             获取手机号
           </button>
           <p>手机号：<span id="phone"></span></p>
@@ -61,7 +58,11 @@
     </div>
     <script>
       Telegram.WebApp.ready();
-      Telegram.WebApp.requestContact();
+      let phone = document.getElementById("phone")
+      Telegram.WebApp.requestContact(function (contact) {
+        phone.innerText = contact.phone_number
+      });
+
       // telegram小程序的登录
       // telegram 小程序获取用户的手机号
       // function initTelegramAuth() {
@@ -86,7 +87,7 @@
       // }
       // initTelegramAuth()
       // 获取用户信息
-      const phone = Telegram.WebApp.initDataUnsafe.user
+      // const phone = Telegram.WebApp.initDataUnsafe.user;
       const testBtn = document.getElementById("testBtn");
       testBtn.addEventListener("click", () => {
         // telegram的弹窗
