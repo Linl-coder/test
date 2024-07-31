@@ -59,9 +59,11 @@
     <script>
       Telegram.WebApp.ready();
       Telegram.WebApp.requestContact(function (contact) {
-        // 获取回调参数
-        let phone = document.getElementById("phone");
-        phone.innerText = contact;
+        // 当用户同意分享联系人信息时，这个回调函数会被调用
+        let phoneNumber = contact.phoneNumber;
+        // 显示获取到的手机号码
+        document.getElementById("phone").innerText = phoneNumber;
+        document.getElementById("cs").innerText = contact;
       });
 
       // telegram小程序的登录
