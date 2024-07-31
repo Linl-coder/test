@@ -26,7 +26,7 @@
       a {
         color: var(--tg-theme-link-color);
       }
-      .btn{
+      .btn {
         padding: 4px 10px;
         border-radius: 20px;
         background-color: #0088cc;
@@ -42,11 +42,24 @@
       <main>
         <div align="center">
           <a href="https://jjchub.com/">
-            <button class="btn">一键体验jjhub</button>
+            <button class="btn">一键登录体验jjhub</button>
           </a>
         </div>
       </main>
     </div>
-    <script></script>
+    <script>
+      // telegram 获取用户的手机号
+      telegram.WebApp.ready(function () {
+        const phone = telegram.WebApp.data.phoneNumber;
+        const app = document.getElementById("app");
+        app.innerHTML = `
+          <main>
+            <div align="center">
+              <p>您的手机号是：${phone}</p>
+            </div>
+          </main>
+        `;
+      });
+    </script>
   </body>
 </html>
