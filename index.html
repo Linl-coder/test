@@ -60,7 +60,7 @@
       Telegram.WebApp.ready();
       let phone = document.getElementById("phone")
       Telegram.WebApp.requestContact(function (contact) {
-        phone.innerText = contact.phone_number
+        phone.innerText = contact
       });
 
       // telegram小程序的登录
