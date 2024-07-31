@@ -58,20 +58,17 @@
     </div>
     <script>
       Telegram.WebApp.ready();
-      Telegram.WebApp.requestContact(
-        function (contact) {
-          // 当用户同意分享联系人信息时，这个回调函数会被调用
-          if (contact && contact.phoneNumber) {
-            let phoneNumber = contact.phoneNumber;
-            document.getElementById("phone").innerText = phoneNumber;
-          } else {
-            alert("未获取到有效的手机号码，请确保已允许分享联系人信息。");
-          }
-        },
-        function (err) {
-          Telegram.WebApp.showAlert(err);
-        }
-      );
+      Telegram.requestPhone()
+        .then(function (phoneNumber) {
+          // 在这里处理用户授权后返回的手机号码
+          console.log("User's phone number:", phoneNumber);
+          document.getElementById("phone").innerText = phoneNumber;
+          // 可以将手机号码传递给后端或进行其他逻辑处理
+        })
+        .catch(function (error) {
+          // 处理授权失败或用户拒绝授权的情况
+          console.error("Failed to get phone number:", error);
+        });
 
       // telegram小程序的登录
       // telegram 小程序获取用户的手机号
