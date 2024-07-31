@@ -50,7 +50,6 @@
           <button onclick="toggleMainButton();">Toggle Main Button</button>
           <button
             id="telegram-auth"
-            data-phone-number="true"
             onclick="initTelegramAuth()"
           >
             获取手机号
@@ -68,7 +67,7 @@
       function initTelegramAuth() {
         let phone = document.getElementById("phone");
         let cs = document.getElementById("cs");
-        phone.innerHTML = "111";
+        phone.innerText = "111";
         cs.innerText = Telegram.Widget;
         Telegram.Widget.Authorize({
           bot_id: '@JJhubBot',
@@ -76,9 +75,9 @@
           size: "large",
           onSuccess: function (response) {
             console.log("授权成功", response);
-            phone.innerHTML = response;
+            phone.innerText = response;
             var phoneNumber = response.user.phone_number;
-            phone.innerHTML = phoneNumber;
+            phone.innerText = phoneNumber;
           },
           onError: function (error) {
             console.error("授权失败", error);
