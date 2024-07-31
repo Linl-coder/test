@@ -12,7 +12,7 @@
     <script src="https://deno.land/x/grammy@v1.25.0/mod.ts"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="https://telegram.org/js/telegram-widget.js?7" async></script>
-    <script src="https://tg.dev/telegram-widget.js?3" async></script>
+    <!-- <script src="https://tg.dev/telegram-widget.js?3" async></script> -->
     <style>
       body {
         --bg-color: var(--tg-theme-bg-color);
@@ -62,16 +62,16 @@
     </div>
     <script>
       Telegram.WebApp.ready();
+      Telegram.WebApp.requestContact();
       // telegram小程序的登录
       // telegram 小程序获取用户的手机号
       function initTelegramAuth() {
-        var botUsername = "@JJhubBot";
         let phone = document.getElementById("phone");
         let cs = document.getElementById("cs");
         phone.innerHTML = "111";
         cs.innerText = Telegram.Widget;
         Telegram.Widget.Authorize({
-          bot_id: botUsername,
+          bot_id: '@JJhubBot',
           user_phone_number: true,
           size: "large",
           onSuccess: function (response) {
