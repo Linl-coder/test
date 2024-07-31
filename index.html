@@ -44,22 +44,27 @@
           <a href="https://jjchub.com/">
             <button class="btn">一键登录体验jjhub</button>
           </a>
+          <button id="testBtn">测试按钮</button>
         </div>
       </main>
     </div>
     <script>
       // telegram 获取用户的手机号
-      telegram.WebApp.ready(function () {
-        const phone = telegram.WebApp.data.phoneNumber;
-        const app = document.getElementById("app");
-        app.innerHTML = `
+      Telegram.WebApp.ready();
+      Telegram.WebApp.expand();
+      const phone = Telegram.WebApp.initDataUnsafe;
+      const testBtn = document.getElementById("testBtn");
+      testBtn.addEventListener("click", () => {
+        // telegram的弹窗
+        Telegram.WebApp.showAlert("您的信息是：" + phone);
+      });
+      app.innerHTML = `
           <main>
             <div align="center">
               <p>您的手机号是：${phone}</p>
             </div>
           </main>
         `;
-      });
     </script>
   </body>
 </html>
