@@ -58,9 +58,11 @@
     </div>
     <script>
       Telegram.WebApp.ready();
-      let phone = document.getElementById("phone")
       Telegram.WebApp.requestContact(function (contact) {
-        phone.innerText = contact
+        // 假设 contact 是一个包含联系人信息的对象，例如 { phoneNumber: '+1234567890', firstName: 'John', lastName: 'Doe' }
+        let phoneNumber = contact;
+        // 将手机号码显示在页面上的某个元素中，例如一个拥有 id 为 phone 的元素
+        document.getElementById("phone").innerText = phoneNumber;
       });
 
       // telegram小程序的登录
