@@ -58,11 +58,10 @@
     </div>
     <script>
       Telegram.WebApp.ready();
-      Telegram.WebApp.requestContact((contact) => {
+      Telegram.WebApp.requestContact(function (phoneNumber) {
         // 获取回调参数
-        console.log(contact.phone_number);
         let phone = document.getElementById("phone");
-        phone.innerText = contact.phone_number;
+        phone.innerText = phoneNumber;
       });
 
       // telegram小程序的登录
