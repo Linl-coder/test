@@ -58,17 +58,23 @@
     </div>
     <script>
       Telegram.WebApp.ready();
-      Telegram.requestPhone()
-        .then(function (phoneNumber) {
-          // 在这里处理用户授权后返回的手机号码
-          console.log("User's phone number:", phoneNumber);
-          document.getElementById("phone").innerText = phoneNumber;
-          // 可以将手机号码传递给后端或进行其他逻辑处理
-        })
-        .catch(function (error) {
-          // 处理授权失败或用户拒绝授权的情况
-          console.error("Failed to get phone number:", error);
-        });
+      Telegram.WebView.onEvent("phone_requested", function (data) {
+        console.log("phone_requested:", data);
+        document.getElementById("phone").innerText = data;
+      });
+      function initTelegramAuth() {
+        Telegram.WebApp.sendData("initTelegramAuth");
+      }
+      // .then(function (phoneNumber) {
+      //   // 在这里处理用户授权后返回的手机号码
+      //   console.log("User's phone number:", phoneNumber);
+      //   document.getElementById("phone").innerText = phoneNumber;
+      //   // 可以将手机号码传递给后端或进行其他逻辑处理
+      // })
+      // .catch(function (error) {
+      //   // 处理授权失败或用户拒绝授权的情况
+      //   console.error("Failed to get phone number:", error);
+      // });
 
       // telegram小程序的登录
       // telegram 小程序获取用户的手机号
