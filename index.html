@@ -56,7 +56,7 @@
         <button @click="Telegram.WebApp.showAlert('Hello World!');">
           Launch Alert
         </button>
-        <button @click="alert">Launch Alert</button>
+        <button @click="alert()">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
@@ -93,6 +93,7 @@
               _this.alert(error);
             }
           });
+          bot.start()
         },
         methods: {
           alert(data = "error") {
