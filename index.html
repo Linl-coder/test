@@ -56,7 +56,7 @@
         <button @click="Telegram.WebApp.showAlert('Hello World!');">
           Launch Alert
         </button>
-        <button @click="alert()">Launch Alert</button>
+        <button @click="alert">Launch Alert</button>
         <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
@@ -74,30 +74,36 @@
           Telegram.WebApp.setBackgroundColor("#ff0000");
           this.tg_data = Telegram.WebApp.initDataUnsafe;
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
-          const bot = new GrammyBot(token);
-          // bot.start();
-          let _this = this;
-          bot.command("start", async (ctx) => {
-            const firstName = ctx.upadte.message.from.first_name;
-            const userId = ctx.from.id;
-            try {
-              const profilePhotos = await ctx.telegram.getUserProfilePhotos(userId, {
-                limit: 1,
-              });
-              if (profilePhotos.total_count > 0) {
-                const fileId = profilePhotos.photos[0][0].file_id;
-                const file = await bot.api.getFile(fileId);
-                _this.photoUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+          const botUsername = tg_data.user.username; // 替换为你的Telegram Bot的username
+          const userId = tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
+          // 获取用户信息
+          fetch(
+            `https://api.telegram.org/bot${token}/getUserProfilePhotos?user_id=${userId}&limit=1`
+          )
+            .then((response) => response.json())
+            .then((data) => {
+              console.log(data);
+              if (data.result.total_count > 0) {
+                const fileId = data.result.photos[0][0].file_id;
+                return fetch(
+                  `https://api.telegram.org/bot${token}/getFile?file_id=${fileId}`
+                );
+              } else {
+                throw new Error("No profile photos found.");
               }
-            } catch (error) {
-              _this.alert(error);
-            }
-          });
-          bot.start()
+            })
+            .then((response) => response.json())
+            .then((fileData) => {
+              const fileUrl = `https://api.telegram.org/file/bot${token}/${fileData.result.file_path}`;
+              this.photoUrl = fileUrl;
+            })
+            .catch((error) => {
+              console.log(error.message);
+            });
         },
         methods: {
-          alert(data = "error") {
-            Telegram.WebApp.showAlert(data);
+          alert() {
+            Telegram.WebApp.showAlert('hello JJhub');
           },
           showPopup() {
             console.log(111);
