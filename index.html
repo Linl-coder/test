@@ -74,14 +74,14 @@
           Telegram.WebApp.setBackgroundColor("#ff0000");
           this.tg_data = Telegram.WebApp.initDataUnsafe;
           const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
-          const bot = new Bot(token);
+          const bot = new GrammyBot(token);
           // bot.start();
           let _this = this;
           bot.command("start", async (ctx) => {
             const firstName = ctx.upadte.message.from.first_name;
             const userId = ctx.from.id;
             try {
-              const profilePhotos = await bot.api.getUserProfilePhotos(userId, {
+              const profilePhotos = await ctx.telegram.getUserProfilePhotos(userId, {
                 limit: 1,
               });
               if (profilePhotos.total_count > 0) {
