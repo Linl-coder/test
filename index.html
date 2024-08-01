@@ -40,82 +40,77 @@
 
   <body>
     <div id="app">
+      {{message}}
       <main>
         <div align="center">
-          <a href="https://jjchub.com/">
-            <button class="btn">一键登录体验jjhub</button>
-          </a>
-          <button id="testBtn">测试按钮</button>
-          <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
-          <button onclick="toggleMainButton();">Toggle Main Button</button>
-          <button id="telegram-auth" onclick="initTelegramAuth()">
-            获取手机号
-          </button>
-          <p>手机号：<span id="phone"></span></p>
-          <p id="cs"></p>
-          <p>用户信息：<span id="user"></span></p>
+          <a href="https://ton.org/"
+            ><img
+              width="48"
+              src="./assets/tapps.png"
+              alt="logo of telegram web apps"
+          /></a>
         </div>
+        <img width="48" :src="photoUrl" alt="" />
+        <div style="color: red">{{tg_data}}</div>
+        <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
+        <button @click="Telegram.WebApp.showAlert('Hello World!');">
+          Launch Alert
+        </button>
+        <button @click="alert">Launch Alert</button>
+        <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
     <script>
-      Telegram.WebApp.ready();
-      Telegram.WebApp.requestContact();
-      Telegram.WebView.onEvent("phone_requested", function (data) {
-        console.log("phone_requested:", data);
-        document.getElementById("phone").innerText = data;
+      var app = new Vue({
+        el: "#app",
+        data: {
+          message: "Hello Vue",
+          tg_data: "",
+          photoUrl: "",
+        },
+        created() {
+          // Init TWA
+          Telegram.WebApp.ready();
+          Telegram.WebApp.setBackgroundColor("#ff0000");
+          this.tg_data = Telegram.WebApp.initDataUnsafe;
+          const token = "7169857792:AAHSC7TqH5DdttJRMTE1Y8ftyTjKQR_BVNI";
+          const bot = new Bot(token);
+          // bot.start();
+          let _this = this;
+          bot.command("start", async (ctx) => {
+            const firstName = ctx.upadte.message.from.first_name;
+            const userId = ctx.from.id;
+            try {
+              const profilePhotos = await bot.api.getUserProfilePhotos(userId, {
+                limit: 1,
+              });
+              if (profilePhotos.total_count > 0) {
+                const fileId = profilePhotos.photos[0][0].file_id;
+                const file = await bot.api.getFile(fileId);
+                _this.photoUrl = `https://api.telegram.org/file/bot${token}/${file.file_path}`;
+              }
+            } catch (error) {
+              _this.alert(error);
+            }
+          });
+        },
+        methods: {
+          alert(data = "error") {
+            Telegram.WebApp.showAlert(data);
+          },
+          showPopup() {
+            console.log(111);
+            Telegram.WebApp.showPopup({
+              title: "Title",
+              message: "Some message",
+              buttons: [
+                { id: "link", type: "default", text: "Open ton.org" },
+                { type: "cancel" },
+              ],
+            });
+          },
+        },
       });
-      Telegram.getUserInfo().then(function (user) {
-        console.log("User info:", user);
-        document.getElementById("user").innerText = user;
-      });
-      // .then(function (phoneNumber) {
-      //   // 在这里处理用户授权后返回的手机号码
-      //   console.log("User's phone number:", phoneNumber);
-      //   document.getElementById("phone").innerText = phoneNumber;
-      //   // 可以将手机号码传递给后端或进行其他逻辑处理
-      // })
-      // .catch(function (error) {
-      //   // 处理授权失败或用户拒绝授权的情况
-      //   console.error("Failed to get phone number:", error);
-      // });
-
-      // telegram小程序的登录
-      // telegram 小程序获取用户的手机号
-      // function initTelegramAuth() {
-      //   let phone = document.getElementById("phone");
-      //   let cs = document.getElementById("cs");
-      //   phone.innerText = "111";
-      //   cs.innerText = Telegram.Widget;
-      //   Telegram.Widget.Authorize({
-      //     bot_id: '@JJhubBot',
-      //     user_phone_number: true,
-      //     size: "large",
-      //     onSuccess: function (response) {
-      //       console.log("授权成功", response);
-      //       phone.innerText = response;
-      //       var phoneNumber = response.user.phone_number;
-      //       phone.innerText = phoneNumber;
-      //     },
-      //     onError: function (error) {
-      //       console.error("授权失败", error);
-      //     },
-      //   });
-      // }
-      // initTelegramAuth()
-      // 获取用户信息
-      const phone = Telegram.WebApp.initDataUnsafe.user;
-      const testBtn = document.getElementById("testBtn");
-      testBtn.addEventListener("click", () => {
-        // telegram的弹窗
-        Telegram.WebApp.showAlert("您的信息是：" + phone);
-      });
-      function toggleMainButton() {
-        if (Telegram.WebApp.MainButton.isVisible) {
-          Telegram.WebApp.MainButton.hide();
-        } else {
-          Telegram.WebApp.MainButton.show();
-        }
-      }
     </script>
   </body>
 </html>
