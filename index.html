@@ -83,6 +83,7 @@
             .then((response) => response.json())
             .then((data) => {
               console.log(data);
+              this.message = 'Hello Tg'
               if (data.result.total_count > 0) {
                 const fileId = data.result.photos[0][0].file_id;
                 return fetch(
