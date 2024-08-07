@@ -74,7 +74,7 @@
           // Init TWA
           Telegram.WebApp.ready();
           Telegram.WebApp.setBackgroundColor("#ff0000");
-          this.tg_data = Telegram.WebApp.initDataUnsafe;
+          this.tg_data = Telegram.WebApp.initData;
           // 获取用户信息
           this.botUsername = this.tg_data.user.username; // 替换为你的Telegram Bot的username
           this.userId = this.tg_data.user.id; // 替换为要查询的用户的Telegram用户ID
