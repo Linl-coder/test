@@ -54,10 +54,9 @@
         <div>{{botUsername}}</div>
         <div>{{userId}}</div>
         <div style="color: red">{{tg_data}}</div>
+        <div style="color: red">{{res}}</div>
 
-        <div style="font-weight: bold;margin: 10px 0;">
-          {{tg_data1}}
-        </div>
+        <div style="font-weight: bold; margin: 10px 0">{{tg_data1}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
         <button @click="alert('Hello World!');">Alert</button>
         <button @click="alert">Launch Alert</button>
@@ -73,6 +72,7 @@
           photoUrl: "",
           botUsername: "",
           userId: "",
+          res: "",
         },
         created() {
           // Init TWA
@@ -110,6 +110,25 @@
             .catch((error) => {
               console.log(error.message);
             });
+          //  登录接口请求
+          fetch("https://test.sapce.ridvqqxa.com/api/login/tg-login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "company-code": 8401,
+            },
+            body: JSON.stringify({
+              init_data: this.tg_data,
+            }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+              }
+              return response.json();
+            })
+            .then((data) => (this.res = data))
+            .catch((error) => console.error("Error:", error));
         },
         methods: {
           alert(data = "Hello JJhub") {
