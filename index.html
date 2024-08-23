@@ -137,8 +137,8 @@
         },
         methods: {
           alert() {
-            Telegram.WebApp.openLink(
-              "https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare"
+            Telegram.WebApp.openTelegramLink(
+              "https://t.me/share?url=https://t.me/jjhub_test_bot"
             );
             //  https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare
           },
@@ -155,7 +155,7 @@
               },
               function (btn) {
                 if (btn === "link") {
-                  Telegram.WebApp.openLink(
+                  Telegram.WebApp.openTelegramLink(
                     "https://t.me/share?url=https://t.me/jjhub_test_bot"
                   );
                 }
