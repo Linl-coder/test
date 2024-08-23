@@ -142,15 +142,25 @@
         methods: {
           alert(data = "Hello JJhub") {
             // 获取用户手机号
-            Telegram.WebApp.requestContact(function (sent, event) {
-              if (sent) {
-                // this.phone_data = event;
-                Telegram.WebApp.showAlert('成功');
-              } else {
-                Telegram.WebApp.showAlert("取消");
-              }
+            // Telegram.WebApp.requestContact(function (sent, event) {
+            //   if (sent) {
+            //     // this.phone_data = event;
+            //     Telegram.WebApp.showAlert('成功');
+            //   } else {
+            //     Telegram.WebApp.showAlert("取消");
+            //   }
+            // });
+            // 分享
+            Telegram.WebApp.share({
+              title: "分享标题",
+              text: "分享内容",
+              link: {
+                url: "https://www.baidu.com",
+                description: "百度一下",
+              },
             });
           },
+
           showPopup() {
             console.log(111);
             Telegram.WebApp.showPopup({
