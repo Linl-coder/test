@@ -81,8 +81,9 @@
 
           this.tg_data = Telegram.WebApp.initData;
           this.tg_data1 = Telegram.WebApp.initDataUnsafe;
+          Telegram.WebApp.sendData("Hello from TWA!");
           // 向telegram bot 发送消息
-
+          // https://t.me/share/url?url ={url}&text={text}
           fetch("https://test.sapce.ridvqqxa.com/api/login/tg-login", {
             method: "POST",
             headers: {
@@ -135,7 +136,12 @@
         methods: {
           alert(data = "Hello JJhub") {
             Telegram.WebApp.showAlert(data);
-            Telegram.WebApp.sendData("Hello from TWA!");
+            // 获取用户手机号
+            Telegram.WebApp.requestContact();
+            // 获取用户手机号
+            Telegram.WebApp.onEvent("contact", (data) => {
+              console.log(data);
+            });
           },
           showPopup() {
             console.log(111);
