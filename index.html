@@ -12,15 +12,8 @@
     <script src="https://deno.land/x/grammy@v1.25.0/mod.ts"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <!-- <script src="https://tg.dev/telegram-widget.js?3" async></script> -->
-    <script
-      async
-      src="https://telegram.org/js/telegram-widget.js?22"
-      data-telegram-share-url="https://core.telegram.org/widgets/share"
-      data-size="large"
-    ></script>
     <style>
       body {
-        overflow: hidden;
         --bg-color: var(--tg-theme-bg-color);
         font: 12px/18px "Lucida Grande", "Lucida Sans Unicode", Arial, Helvetica,
           Verdana, sans-serif;
@@ -65,12 +58,11 @@
         <div style="color: red">{{res}}</div>
         <div style="color: red">{{phone}}</div>
         <div style="color: red">{{phone_data}}</div>
-        <!-- <div style="color: red" v-for="item in 20">{{item}}</div> -->
 
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-        <div @click="alert">Alert</div>
-        <!-- 分享链接 -->
-        <button @click="shareLink">Share Link</button>
+        <button @click="alert('Hello World!');">Alert</button>
+        <button @click="alert">Launch Alert</button>
+        <button @click="showPopup">Launch Popup</button>
       </main>
     </div>
     <script>
@@ -148,7 +140,7 @@
           //   });
         },
         methods: {
-          alert() {
+          alert(data = "Hello JJhub") {
             // 获取用户手机号
             // Telegram.WebApp.requestContact(function (sent, event) {
             //   if (sent) {
@@ -160,8 +152,22 @@
             // });
             // 分享链接
           },
-          shareLink() {
-            Telegram.WebApp.OpenLink("https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare");
+
+          showPopup() {
+            console.log(111);
+            Telegram.WebApp.showPopup({
+              title: "Title",
+              message: "Some message",
+              buttons: [
+                {
+                  id: "link",
+                  type: "default",
+                  text: "Open ton.org",
+                  url: "https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare",
+                },
+                { type: "cancel" },
+              ],
+            });
           },
         },
       });
