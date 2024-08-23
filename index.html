@@ -144,8 +144,8 @@
             // 获取用户手机号
             Telegram.WebApp.requestContact(function (sent, event) {
               if (sent) {
-                this.phone_data = event;
-                Telegram.WebApp.showAlert(event.contact.phone_number);
+                // this.phone_data = event;
+                Telegram.WebApp.showAlert('成功');
               } else {
                 Telegram.WebApp.showAlert("取消");
               }
