@@ -142,11 +142,13 @@
         methods: {
           alert(data = "Hello JJhub") {
             // 获取用户手机号
-            Telegram.WebApp.requestContact((data, contact) => {
-              this.phone = data;
-              this.phone_data = contact;
-              console.log(data);
-              Telegram.WebApp.showAlert(contact.phone_number);
+            Telegram.WebApp.requestContact(function (sent, event) {
+              if (sent) {
+                this.phone_data = event;
+                Telegram.WebApp.showAlert(event.contact.phone_number);
+              } else {
+                Telegram.WebApp.showAlert("取消");
+              }
             });
           },
           showPopup() {
