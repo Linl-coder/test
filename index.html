@@ -144,20 +144,21 @@
             // 获取用户手机号
             Telegram.WebApp.requestContact(function (sent, event) {
               if (sent) {
-                // this.phone_data = event;
-                Telegram.WebApp.showAlert('成功');
+                this.phone_data = event;
+                Telegram.WebApp.showAlert("成功");
               } else {
                 Telegram.WebApp.showAlert("取消");
               }
             });
             // 分享
-            Telegram.WebApp.share({
+            Telegram.WebApp.shareToStory({
+              text: data,
+              url: "https://www.baidu.com",
+              background_color: "#FFFFFF",
               title: "分享标题",
-              text: "分享内容",
-              link: {
-                url: "https://www.baidu.com",
-                description: "百度一下",
-              },
+              caption: "分享内容",
+              image_url:
+                "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
             });
           },
 
