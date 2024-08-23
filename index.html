@@ -137,9 +137,14 @@
         },
         methods: {
           alert() {
-            Telegram.WebApp.openLink(
-              "https://t.me/share?url=https://t.me/jjhub_test_bot"
-            );
+            navigator.share({
+              title: "Telegram",
+              text: "Telegram",
+              url: "https://t.me/jjhub_test_bot",
+            });
+            // Telegram.WebApp.openLink(
+            //   "https://t.me/share?url=https://t.me/jjhub_test_bot"
+            // );
             //  https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare
           },
           showPopup() {
