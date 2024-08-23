@@ -53,12 +53,10 @@
         <div>{{botUsername}}</div>
         <div>{{userId}}</div>
         <div style="color: red">{{tg_data}}</div>
-        <div style="font-weight: bold; margin: 10px 0">{{tg_data1}}</div>
-
         <div style="color: red">{{res}}</div>
         <div style="color: red">{{phone}}</div>
-        <div style="color: red">{{phone_data}}</div>
 
+        <div style="font-weight: bold; margin: 10px 0">{{tg_data1}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
         <button @click="alert('Hello World!');">Alert</button>
         <button @click="alert">Launch Alert</button>
@@ -76,10 +74,8 @@
           botUsername: "",
           userId: "",
           res: "",
-          phone: 0,
-          phone_data: "",
+          phone: "",
         },
-
         created() {
           // Init TWA
           Telegram.WebApp.ready();
@@ -140,31 +136,17 @@
           //   });
         },
         methods: {
-          alert(data = "Hello JJhub") {
-            // 获取用户手机号
-            // Telegram.WebApp.requestContact(function (sent, event) {
-            //   if (sent) {
-            //     this.phone_data = event;
-            //     Telegram.WebApp.showAlert("成功");
-            //   } else {
-            //     Telegram.WebApp.showAlert("取消");
-            //   }
-            // });
-            // 分享链接
+          alert() {
+            Telegram.WebApp.openLink("www.baidu.com");
+            //  https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare
           },
-
           showPopup() {
             console.log(111);
             Telegram.WebApp.showPopup({
               title: "Title",
               message: "Some message",
               buttons: [
-                {
-                  id: "link",
-                  type: "default",
-                  text: "Open ton.org",
-                  url: "https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare",
-                },
+                { id: "link", type: "default", text: "Open ton.org" },
                 { type: "cancel" },
               ],
             });
