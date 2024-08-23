@@ -54,6 +54,7 @@
         <div>{{userId}}</div>
         <div style="color: red">{{tg_data}}</div>
         <div style="color: red">{{res}}</div>
+        <div style="color: red">{{phone}}</div>
 
         <div style="font-weight: bold; margin: 10px 0">{{tg_data1}}</div>
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
@@ -73,6 +74,7 @@
           botUsername: "",
           userId: "",
           res: "",
+          phone:''
         },
         created() {
           // Init TWA
@@ -141,6 +143,7 @@
             // 获取用户手机号
             Telegram.WebApp.onEvent("contact", (data) => {
               console.log(data);
+              this.phone = data
             });
           },
           showPopup() {
