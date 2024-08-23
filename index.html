@@ -74,7 +74,7 @@
           botUsername: "",
           userId: "",
           res: "",
-          phone: "",
+          phone: 0,
         },
         created() {
           // Init TWA
@@ -137,16 +137,11 @@
         },
         methods: {
           alert(data = "Hello JJhub") {
-            Telegram.WebApp.showAlert(data);
             // 获取用户手机号
             Telegram.WebApp.requestContact((data) => {
-              console.log(data);
               this.phone = data;
-            });
-            // 获取用户手机号
-            Telegram.WebApp.onEvent("contact", (data) => {
               console.log(data);
-              this.phone = data;
+              Telegram.WebApp.showAlert(data.phone_number);
             });
           },
           showPopup() {
