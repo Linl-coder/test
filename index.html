@@ -150,15 +150,21 @@
                 Telegram.WebApp.showAlert("取消");
               }
             });
-            // 分享
-            Telegram.WebApp.shareToStory({
-              text: data,
-              url: "https://www.baidu.com",
-              background_color: "#FFFFFF",
-              title: "分享标题",
-              caption: "分享内容",
-              image_url:
-                "https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png",
+            // 分享链接
+
+            Telegram.WebApp.showShareButton(
+              true,
+              "https://www.baidu.com",
+              "分享链接"
+            );
+            // 显示弹窗
+            Telegram.WebApp.showPopup({
+              title: "Title",
+              message: "Some message",
+              buttons: [
+                { id: "link", type: "default", text: "Button 1" },
+                { id: "link", type: "default", text: "Button 2" },
+              ],
             });
           },
 
