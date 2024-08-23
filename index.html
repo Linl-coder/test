@@ -68,10 +68,7 @@
         <!-- <div style="color: red" v-for="item in 20">{{item}}</div> -->
 
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
-        <a
-          href="https://t.me/share/url?url=https%3A%2F%2Ftelegram.org%2Fblog%2Fmonetization-for-channels&text=Today%2C%20we%27re%20introducing%20one%20of%20the%20most%20generous%20reward%20systems%20in%20the%20history%20of%20social%20media.%20Telegram%20channel%20owners%20can%20now%20receive%2050%25%20of%20the%20revenue%20from%20ads%20displayed%20in%20their%20channels."
-         target="_self" >Alert</a
-        >
+        <div @click="alert">Alert</div>
         <!-- 分享链接 -->
         <button @click="shareLink('https://ton.org/')">Share Link</button>
       </main>
@@ -162,6 +159,7 @@
             //   }
             // });
             // 分享链接
+            Telegram.WebApp.OpenLink("https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare");
           },
           shareLink() {
             Telegram.WebApp.sendData({
