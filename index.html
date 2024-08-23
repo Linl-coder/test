@@ -137,19 +137,30 @@
         },
         methods: {
           alert() {
-            Telegram.WebApp.openTelegramLink("https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare");
+            Telegram.WebApp.openLink(
+              "https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare"
+            );
             //  https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare
           },
           showPopup() {
             console.log(111);
-            Telegram.WebApp.showPopup({
-              title: "Title",
-              message: "Some message",
-              buttons: [
-                { id: "link", type: "default", text: "Open ton.org" },
-                { type: "cancel" },
-              ],
-            });
+            Telegram.WebApp.showPopup(
+              {
+                title: "Title",
+                message: "Some message",
+                buttons: [
+                  { id: "link", type: "default", text: "Open ton.org" },
+                  { type: "cancel" },
+                ],
+              },
+              function (btn) {
+                if (btn === "link") {
+                  Telegram.WebApp.openLink(
+                    "https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare"
+                  );
+                }
+              }
+            );
           },
         },
       });
