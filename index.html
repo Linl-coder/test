@@ -70,7 +70,7 @@
         <h1 id="title">Telegram Mini Apps Vanilla JS Sample App</h1>
         <div @click="alert">Alert</div>
         <!-- 分享链接 -->
-        <button @click="shareLink('https://ton.org/')">Share Link</button>
+        <button @click="shareLink">Share Link</button>
       </main>
     </div>
     <script>
@@ -159,12 +159,9 @@
             //   }
             // });
             // 分享链接
-            Telegram.WebApp.OpenLink("https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare");
           },
           shareLink() {
-            Telegram.WebApp.sendData({
-              data: "Hello, World!",
-            });
+            Telegram.WebApp.OpenLink("https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare");
           },
         },
       });
