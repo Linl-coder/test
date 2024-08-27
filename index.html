@@ -147,7 +147,7 @@
               url: "https://t.me/jjhub_test_bot",
             });
             // Telegram.WebApp.openLink(
-            //   "https://t.me/share?url=https://t.me/jjhub_test_bot"
+            //   "https://t.me/share/url?url=https://t.me/jjhub_test_bot"
             // );
             //  https://t.me/share?url=https%3A%2F%2Fcore.telegram.org%2Fwidgets%2Fshare
           },
@@ -165,13 +165,12 @@
               function (btn) {
                 if (btn === "link") {
                   Telegram.WebApp.openTelegramLink(
-                    "https://t.me/share/url?url=https://t.me/jjhub_test_bot"
-                  );
+                    "https://t.me/share/url?url=https://t.me/jjhub_test_bot/testApp"
                 }
               }
             );
           },
-         
+
         },
       });
     </script>
